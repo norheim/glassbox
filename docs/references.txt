@@ -1,0 +1,4 @@
+http://jamesknelson.com/the-six-things-you-need-to-know-about-babel-6/
+http://jamesknelson.com/using-es6-in-the-browser-with-babel-6-and-webpack/
+http://ctheu.com/2015/05/14/using-react-hot-loader-with-a-webpack-dev-server-and-a-node-server/
+http://survivejs.com/webpack_react/developing_with_webpack/

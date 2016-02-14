@@ -1,0 +1,36 @@
+{
+  "name": "MyStaticServer",
+  "version": "0.0.1",
+  "dependencies": {
+    "babel-polyfill": "^6.5.0",
+    "babel-runtime": "^6.5.0",
+    "brace": "^0.7.0",
+    "firebase": "^2.3.1",
+    "kerberos": "0.0.18",
+    "mongodb": "^2.1.2",
+    "mongoose": "^4.3.4",
+    "mongoose-function": "^0.1.0",
+    "react": "^0.14.3",
+    "react-ace": "^3.1.0",
+    "react-ace-wrapper": "^1.0.1",
+    "react-dom": "^0.14.3",
+    "react-three": "^0.8.0",
+    "socket.io": "^1.3.7",
+    "three": "^0.72.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.5.2",
+    "babel-loader": "^6.2.2",
+    "babel-plugin-transform-runtime": "^6.5.2",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-2": "^6.5.0",
+    "express": "^4.13.3",
+    "gulp": "^3.9.0",
+    "node-libs-browser": "^1.0.0",
+    "webpack": "^1.9.11",
+    "webpack-dev-middleware": "^1.2.0",
+    "webpack-dev-server": "^1.14.1",
+    "webpack-hot-middleware": "^2.2.0"
+  }
+}

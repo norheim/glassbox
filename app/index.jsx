@@ -23,7 +23,7 @@ render(
 	    editorProps={{$blockScrolling: true}}
 	  />
 	 </div>,
-  document.getElementById('example2')
+  document.getElementById('example')
 );
 
 if (module.hot) {

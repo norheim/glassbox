@@ -6,12 +6,12 @@ var APP_DIR = path.resolve(__dirname, 'app');
 
 var config = {
   entry: [
-    path.join('webpack','hot','dev-server'),
+    path.join('webpack-hot-middleware','client'),
     path.join(APP_DIR, 'index.jsx')
   ],
   output: {
     path: BUILD_DIR,
-    publicPath: __dirname,
+    publicPath: '/',
     filename: 'bundle.js'
   },
   plugins: [

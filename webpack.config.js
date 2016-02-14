@@ -6,7 +6,7 @@ var APP_DIR = path.resolve(__dirname, 'app');
 
 var config = {
   entry: [
-    //path.join('webpack','hot','dev-server'),
+    path.join('webpack','hot','dev-server'),
     path.join(APP_DIR, 'index.jsx')
   ],
   output: {
@@ -24,6 +24,7 @@ var config = {
       {
         test : /\.jsx?/,
         include : APP_DIR,
+        exclude: /node_modules/,
         loader : 'babel-loader',
         query: {
           presets: ['react', 'stage-2', 'es2015'],
@@ -34,34 +35,8 @@ var config = {
   }
 };
 module.exports = config;
-/*module.exports = {
-  entry: APP_DIR + '/index.jsx',
-  output: {
-    path: BUILD_DIR,
-    filename: 'bundle.js',
-    //publicPath: '/static/'
-  },
-  /*resolve: {
+/*resolve: {
     alias: {
       'react-ace':  path.join(__dirname, '/node_modules/react-ace/src', 'ace.jsx')
     }
-  },
-  plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
-  ],
-  module: {
-    loaders: [{
-      test: /\.jsx?$/,
-      //include: APP_DIR,
-      loader: 'babel',
-      exclude: /node_modules/,
-      /*
-      query: {
-        presets: ['react', 'es2015'],
-        plugins: ['transform-runtime']
-      }
-    }]
-  }
-};*/
+},*/

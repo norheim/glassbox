@@ -14,9 +14,6 @@ let socketPort = 3001;
 let socket = io('http://localhost:' + socketPort.toString());
 socket.on('connect', function(){console.log('connected')});
 socket.emit('client:sendMessage', 'hello');
-socket.on('server:sendMessage', function(msg){
-	console.log(msg);
-})
 
 function onChange (newValue){
 	console.log(newValue);
@@ -32,6 +29,10 @@ class TestComponent extends React.Component {
     };
     this.content = this.content.bind(this);
     this.test = this.test.bind(this);
+
+    socket.on('server:sendMessage', msg => {
+		this.setState({value: msg});
+	});
   }
 
   content (newValue) {
@@ -58,7 +59,7 @@ class TestComponent extends React.Component {
 		    name="UNIQUE_ID_OF_DIV"
 		    editorProps={{$blockScrolling: true}}
 		  />
-		  <AwesomeComponent value={this.state.value}/>
+		  <AwesomeComponent value={"test string"}/>
 	 </div>
     );
   }

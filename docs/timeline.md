@@ -1,0 +1,5 @@
+- React capabilities (done)
+- ES6 (done)
+- Ace react (done)
+- socket (done)
+- file reading

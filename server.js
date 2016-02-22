@@ -53,3 +53,6 @@ io.on('connection', function(socket){
   	});
 });
 
+if (module.hot) {
+  module.hot.accept();
+}

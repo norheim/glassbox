@@ -4,11 +4,13 @@ var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
 var config = require('./webpack.config');
 var app = new require('express')();
+var port = 3000;
 
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var port = 3000;
 var socketPort = 3001;
+
+var fs = require('fs')
 
 http.listen(socketPort, function(){
   console.log('listening on *:' + socketPort.toString());
@@ -35,7 +37,12 @@ app.listen(port, function(error) {
   }
 });
 
-
+fs.readFile(path.join(__dirname, 'server.js'), 'utf8', function (err,data) {
+  if (err) {
+    return console.log(err);
+  }
+  console.log(data);
+});
 
 io.on('connection', function(socket){
   console.log('a user connected');

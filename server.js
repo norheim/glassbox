@@ -37,18 +37,19 @@ app.listen(port, function(error) {
   }
 });
 
-fs.readFile(path.join(__dirname, 'server.js'), 'utf8', function (err,data) {
-  if (err) {
-    return console.log(err);
-  }
-  console.log(data);
-});
-
 io.on('connection', function(socket){
-  console.log('a user connected');
-
-  socket.on('client:sendMessage', function(msg){
-    console.log('message: ' + msg);
-  });
+  	console.log('a user connected');
+  	socket.on('client:sendMessage', function(msg){
+  		console.log('message: ' + msg);
+  		fs.readFile(path.join(__dirname, 'server.js'), 'utf8', function (err,data) {
+	  		if (err) {
+	    		return console.log(err);
+	  		}
+	  		socket.emit('server:sendMessage',data)
+		});
+  	});
+  	socket.on('disconnect', function(){
+    	console.log('user disconnected');
+  	});
 });
 

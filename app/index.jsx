@@ -14,6 +14,9 @@ let socketPort = 3001;
 let socket = io('http://localhost:' + socketPort.toString());
 socket.on('connect', function(){console.log('connected')});
 socket.emit('client:sendMessage', 'hello');
+socket.on('server:sendMessage', function(msg){
+	console.log(msg);
+})
 
 function onChange (newValue){
 	console.log(newValue);

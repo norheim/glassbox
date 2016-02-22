@@ -10,11 +10,6 @@ import 'brace/mode/java';
 import 'brace/theme/github';
 import 'brace/theme/monokai';
 
-
-function onChange (newValue){
-	console.log(newValue);
-}
- 
 // Render editor 
 render(
 	<TestComponent />,

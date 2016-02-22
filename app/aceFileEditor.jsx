@@ -24,7 +24,6 @@ class TestComponent extends React.Component {
     	editorValue : 'function(){var a = 1}'
     };
     this.content = this.content.bind(this);
-    this.test = this.test.bind(this);
 
     socket.on('server:sendMessage', msg => {
 		this.setState({value: msg});
@@ -35,10 +34,6 @@ class TestComponent extends React.Component {
   	console.log(newValue);
   	this.setState({value: newValue});
     //this.setState({editorValue: 'hi'});
-  }
-
-  test (a) {
-  	return a;
   }
 
   render() {

@@ -17,7 +17,7 @@ class TestComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-    	value : 'plus',
+    	value : 'function test(){var a = 1}',
     	editorValue : 'function(){var a = 1}'
     };
     this.content = this.content.bind(this);
@@ -26,7 +26,7 @@ class TestComponent extends React.Component {
 
   content (newValue) {
   	console.log(newValue);
-  	this.setState({});
+  	this.setState({value: newValue});
     //this.setState({editorValue: 'hi'});
   }
 
@@ -37,17 +37,18 @@ class TestComponent extends React.Component {
   render() {
     return (
       <div>
-		  <AwesomeComponent value={this.state.value}/>
 		  <AceEditor
 		    mode="javascript"
 		    theme="monokai"
 		    name="blah2"
 		    fontSize={14}
 		    height="6em"
+		    value={this.state.value}
 		    onChange={this.content}
 		    name="UNIQUE_ID_OF_DIV"
 		    editorProps={{$blockScrolling: true}}
 		  />
+		  <AwesomeComponent value={this.state.value}/>
 	 </div>
     );
   }

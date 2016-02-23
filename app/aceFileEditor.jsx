@@ -9,25 +9,19 @@ import 'brace/mode/java';
 import 'brace/theme/github';
 import 'brace/theme/monokai';
 
-import io from 'socket.io-client';
-let socketPort = 3001;
-let socket = io('http://localhost:' + socketPort.toString());
-socket.on('connect', function(){console.log('connected')});
-socket.emit('client:sendMessage', 'hello');
-
-class TestComponent extends React.Component {
+class aceFileEditor extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-    	value : 'function test(){var a = 1}',
-    	editorValue : 'function(){var a = 1}'
+      value : '',
     };
     this.content = this.content.bind(this);
 
-    socket.on('server:sendMessage', msg => {
-		this.setState({value: msg});
-	});
+    // Receive data from server
+    this.props.socket.on('server:sendMessage', msg => {
+      this.setState({value: msg});
+    });
   }
 
   content (newValue) {
@@ -44,16 +38,15 @@ class TestComponent extends React.Component {
 		    theme="monokai"
 		    name="blah2"
 		    fontSize={14}
-		    height="6em"
+		    height="15em"
 		    value={this.state.value}
 		    onChange={this.content}
 		    name="UNIQUE_ID_OF_DIV"
-		    editorProps={{$blockScrolling: true}}
 		  />
-		  <AwesomeComponent value={"test string"}/>
+		  <AwesomeComponent value={"test string"} />
 	 </div>
     );
   }
 
 }
-export default TestComponent;
+export default aceFileEditor;

@@ -41,7 +41,7 @@ io.on('connection', function(socket){
   	console.log('a user connected');
   	socket.on('client:sendMessage', function(msg){
   		console.log('message: ' + msg);
-  		fs.readFile(path.join(__dirname, 'server.js'), 'utf8', function (err,data) {
+  		fs.readFile(path.join(__dirname, 'app', 'aceFileEditor.jsx'), 'utf8', function (err,data) {
 	  		if (err) {
 	    		return console.log(err);
 	  		}

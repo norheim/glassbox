@@ -4,15 +4,21 @@ import brace from 'brace';
 
 import AceEditor from 'react-ace';
 import AwesomeComponent from './awesomeComponent.jsx';
-import TestComponent from './aceFileEditor.jsx';
+import aceFileEditor from './aceFileEditor.jsx';
 
 import 'brace/mode/java';
 import 'brace/theme/github';
 import 'brace/theme/monokai';
 
+import io from 'socket.io-client';
+let socketPort = 3001;
+let socket = io('http://localhost:' + socketPort.toString());
+socket.on('connect', function(){console.log('connected')});
+socket.emit('client:sendMessage', 'hello');
+
 // Render editor 
 render(
-	<TestComponent />,
+	<TestComponent socket={socket} />,
   document.getElementById('example')
 );
 
@@ -22,7 +28,7 @@ render(
     theme="monokai"
     name="blah2"
     fontSize={14}
-    height="6em"
+    height="11em"
     value={'hello, I am just a simple editor'}
   />,
   document.getElementById('example2')

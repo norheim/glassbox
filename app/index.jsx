@@ -6,6 +6,7 @@ import AceEditor from 'react-ace';
 import AwesomeComponent from './awesomeComponent.jsx';
 import AceFileEditor from './aceFileEditor.jsx';
 import Dropdown from './Dropdown.jsx';
+import ReactApp from './reactApp.jsx'
 
 import 'brace/mode/java';
 import 'brace/theme/github';
@@ -19,13 +20,13 @@ socket.emit('client:sendMessage', 'hello');
 
 // Render editor 
 render(
-	<AceFileEditor socket={socket} />,
+	<ReactApp socket={socket}/>,
   document.getElementById('example')
 );
 
 
 render(
-  <Dropdown />,
+  <AceFileEditor socket={socket} name="blah3"/>,
   document.getElementById('example2')
 );
 

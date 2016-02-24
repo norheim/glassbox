@@ -39,15 +39,27 @@ app.listen(port, function(error) {
 
 io.on('connection', function(socket){
   	console.log('a user connected');
-  	socket.on('client:sendMessage', function(msg){
-  		console.log('message: ' + msg);
-  		fs.readFile(path.join(__dirname, 'app', 'aceFileEditor.jsx'), 'utf8', function (err,data) {
+
+    socket.on('client:readDirRequest', function(msg){
+      console.log('client:readDirRequest');
+      fs.readdir(path.join(__dirname, 'app'), (err, files) => {
+        if (err) {
+          return console.log(err);
+        }
+        socket.emit('server:readDirResponse',files);
+      });
+    });
+
+  	socket.on('client:readFileRequest', function(filename){
+      console.log('reading '+filename);
+  		fs.readFile(path.join(__dirname, 'app', filename), 'utf8', function (err,data) {
 	  		if (err) {
 	    		return console.log(err);
 	  		}
-	  		socket.emit('server:sendMessage',data)
-		});
+	  		socket.emit('server:readFileResponse', data)
+		  });
   	});
+
   	socket.on('disconnect', function(){
     	console.log('user disconnected');
   	});

@@ -5,6 +5,7 @@ import brace from 'brace';
 import AceEditor from 'react-ace';
 import AwesomeComponent from './awesomeComponent.jsx';
 import AceFileEditor from './aceFileEditor.jsx';
+import Dropdown from './Dropdown.jsx';
 
 import 'brace/mode/java';
 import 'brace/theme/github';
@@ -22,15 +23,9 @@ render(
   document.getElementById('example')
 );
 
+
 render(
-  <AceEditor
-    mode="text"
-    theme="monokai"
-    name="blah2"
-    fontSize={14}
-    height="11em"
-    value={'hello, I am just a simple editor'}
-  />,
+  <Dropdown />,
   document.getElementById('example2')
 );
 

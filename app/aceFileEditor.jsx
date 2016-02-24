@@ -9,7 +9,7 @@ import 'brace/mode/java';
 import 'brace/theme/github';
 import 'brace/theme/monokai';
 
-class aceFileEditor extends React.Component {
+class AceFileEditor extends React.Component {
 
   constructor(props) {
     super(props);
@@ -49,4 +49,4 @@ class aceFileEditor extends React.Component {
   }
 
 }
-export default aceFileEditor;
+export default AceFileEditor;

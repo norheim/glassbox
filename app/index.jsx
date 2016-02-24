@@ -4,7 +4,7 @@ import brace from 'brace';
 
 import AceEditor from 'react-ace';
 import AwesomeComponent from './awesomeComponent.jsx';
-import aceFileEditor from './aceFileEditor.jsx';
+import AceFileEditor from './aceFileEditor.jsx';
 
 import 'brace/mode/java';
 import 'brace/theme/github';
@@ -18,7 +18,7 @@ socket.emit('client:sendMessage', 'hello');
 
 // Render editor 
 render(
-	<TestComponent socket={socket} />,
+	<AceFileEditor socket={socket} />,
   document.getElementById('example')
 );
 

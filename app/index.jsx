@@ -25,11 +25,6 @@ render(
 );
 
 
-render(
-  <AceFileEditor socket={socket} name="blah3"/>,
-  document.getElementById('example2')
-);
-
 if (module.hot) {
   module.hot.accept();
 }

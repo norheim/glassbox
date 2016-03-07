@@ -4,7 +4,7 @@ import AceFileEditor from './aceFileEditor.jsx';
 class ReactApp extends React.Component {
 	render() {
       var rows = [];
-      for (var i=0; i < 2; i++) {
+      for (var i=0; i < 1; i++) {
           rows.push(<AceFileEditor socket={this.props.socket} name={'blah'+i.toString()}/>);
       }
       console.log(rows.length);

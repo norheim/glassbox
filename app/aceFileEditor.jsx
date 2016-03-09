@@ -19,6 +19,7 @@ class AceFileEditor extends React.Component {
     };
     this.content = this.content.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.saveFun = this.saveFun.bind(this);
 
   }
 
@@ -31,13 +32,17 @@ class AceFileEditor extends React.Component {
     this.setState({value: filecontent});
   }
 
+  saveFun (){
+    return this.state.value;
+  }
+
   render() {
     var options = ['default'];
     options = options.concat(this.state.jsxfiles);
 
     return (
       <div>
-      <FileExplorer defaultFile='default' folder='cells' func={this.handleChange}/> 
+      <FileExplorer defaultFile='default' folder='cells' func={this.handleChange} saveFunction={this.saveFun}/> 
 		  <AceEditor
 		    mode="javascript"
 		    theme="monokai"

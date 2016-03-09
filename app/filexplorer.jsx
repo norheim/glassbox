@@ -10,10 +10,12 @@ class FileExplorer extends React.Component {
 		super(props);
         this.state = {
           selectedfile : this.props.defaultFile,
-          filenames : []
+          filenames : [],
+          saved: 'Not saved'
         };
     this.handleChange = this.handleChange.bind(this);
     this.readFiles = this.readFiles.bind(this);
+    this.save = this.save.bind(this);
 
     // List all files in directory
     socket.on('server:listDirResponse'+this.props.folder, msg => {
@@ -27,14 +29,13 @@ class FileExplorer extends React.Component {
 
   readFiles (filename){
     if(filename != "default" && filename != ""){
-      socket.on('server:readFileResponse'+this.state.selectedFile, msg => {});
       socket.on('server:readFileResponse'+filename, msg => {
         this.props.func(msg, filename);
       });
       this.setState({selectedfile: filename});
       const fileRequestData = {
         folder:this.props.folder, 
-        filename:filename
+        filename:filename,
       };
       socket.emit('client:readFileRequest', JSON.stringify(fileRequestData));
     }
@@ -45,6 +46,24 @@ class FileExplorer extends React.Component {
     this.readFiles(filename);
 	}
 
+  save(){
+    console.log('saving');
+    const filename = this.state.selectedfile;
+    if(filename != "default" && filename != ""){
+      const fileSaveData = {
+        folder:this.props.folder, 
+        filename:filename,
+        data: this.props.saveFunction()
+      };
+      socket.on('server:saveFileResponse'+filename, msg => {
+        this.setState({
+          saved: 'Saved correctly'
+        });
+      });
+      socket.emit('client:saveFileRequest', JSON.stringify(fileSaveData));
+    }
+  }
+
 	render() {
       let rows = [<option value='default' key='default'>Choose a file</option>];
       const filenames = this.state.filenames;
@@ -52,9 +71,13 @@ class FileExplorer extends React.Component {
           rows.push(<option value={filenames[i]} key={filenames[i]}>{filenames[i]}</option>);
       }
 	    return (
-      	<select value={this.state.selectedfile} onChange={this.handleChange}>
-          {rows}
-    		</select>
+        <div>
+        	<select value={this.state.selectedfile} onChange={this.handleChange}>
+            {rows}
+      		</select>
+          <input type="button" value="Save" onClick={this.save} />
+          {this.state.saved}
+        </div>
 	    );
 	  }
 }

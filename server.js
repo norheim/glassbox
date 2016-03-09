@@ -5,8 +5,9 @@ var webpackHotMiddleware = require('webpack-hot-middleware');
 var config = require('./webpack.config');
 var app = new require('express')();
 var port = 3000;
-var backend  = require('./app/file-backend');
-backend.startSocket(app);
+var backend  = require('./app/file-over-socket/file-backend');
+var folderToExplore = path.join(__dirname, 'database');
+backend.startSocket(app, folderToExplore);
 
 var fs = require('fs')
 

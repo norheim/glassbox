@@ -4,7 +4,7 @@ import brace from 'brace';
 
 import AceEditor from 'react-ace';
 import AwesomeComponent from './awesomeComponent.jsx';
-import FileExplorer from './filexplorer.jsx';
+import FileExplorer from './file-over-socket/filexplorer.jsx';
 
 import 'brace/mode/java';
 import 'brace/theme/github';
@@ -46,13 +46,23 @@ class AceFileEditor extends React.Component {
 		  <AceEditor
 		    mode="javascript"
 		    theme="monokai"
-		    name={this.props.name}
+		    name={this.props.name+'import'}
 		    fontSize={12}
-		    height="30em"
-		    value={this.state.value}
+		    height="10em"
+		    value={'import React from \'react\''}
 		    onChange={this.content}
         editorProps={{$blockScrolling: true}}
 		  />
+      <AceEditor
+        mode="javascript"
+        theme="monokai"
+        name={this.props.name}
+        fontSize={12}
+        height="20em"
+        value={this.state.value}
+        onChange={this.content}
+        editorProps={{$blockScrolling: true}}
+      />
 		  <AwesomeComponent value={"test string"} />
 	 </div>
     );

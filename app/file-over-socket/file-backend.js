@@ -2,10 +2,10 @@ var path = require('path');
 var fs = require('fs');
 var socketPort = 3010;
 
-function filebackend(app){
+function filebackend(app, databasePath){
   var http = require('http').Server(app);
   var io = require('socket.io')(http);
-  var databasePath = path.join(__dirname, '..', 'database');
+  //var databasePath = path.join(__dirname, '..', 'database');
 
   http.listen(socketPort, function(){
     console.log('listening on *:' + socketPort.toString());

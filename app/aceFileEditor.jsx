@@ -4,22 +4,30 @@ import brace from 'brace';
 
 import AceEditor from 'react-ace';
 import AwesomeComponent from './awesomeComponent.jsx';
+import Dropdown from './Dropdown.jsx';
 
 import 'brace/mode/java';
 import 'brace/theme/github';
 import 'brace/theme/monokai';
 
-class aceFileEditor extends React.Component {
+class AceFileEditor extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
       value : '',
+      jsxfiles : [],
     };
     this.content = this.content.bind(this);
+    this.handleChange = this.handleChange.bind(this);
 
+    this.props.socket.emit('client:readDirRequest','');
+
+    this.props.socket.on('server:readDirResponse', msg => {
+      this.setState({jsxfiles: msg});
+    });
     // Receive data from server
-    this.props.socket.on('server:sendMessage', msg => {
+    this.props.socket.on('server:readFileResponse', msg => {
       this.setState({value: msg});
     });
   }
@@ -30,18 +38,27 @@ class aceFileEditor extends React.Component {
     //this.setState({editorValue: 'hi'});
   }
 
+  handleChange (filename) {
+    console.log('readFileRequest');
+    this.props.socket.emit('client:readFileRequest',filename);
+  }
+
   render() {
+    var options = ['default'];
+    options = options.concat(this.state.jsxfiles);
+
     return (
       <div>
+      <Dropdown options={options} onChange={this.handleChange}/>
 		  <AceEditor
 		    mode="javascript"
 		    theme="monokai"
-		    name="blah2"
-		    fontSize={14}
-		    height="15em"
+		    name={this.props.name}
+		    fontSize={12}
+		    height="30em"
 		    value={this.state.value}
 		    onChange={this.content}
-		    name="UNIQUE_ID_OF_DIV"
+        editorProps={{$blockScrolling: true}}
 		  />
 		  <AwesomeComponent value={"test string"} />
 	 </div>
@@ -49,4 +66,4 @@ class aceFileEditor extends React.Component {
   }
 
 }
-export default aceFileEditor;
+export default AceFileEditor;

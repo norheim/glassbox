@@ -4,7 +4,9 @@ import brace from 'brace';
 
 import AceEditor from 'react-ace';
 import AwesomeComponent from './awesomeComponent.jsx';
-import aceFileEditor from './aceFileEditor.jsx';
+import AceFileEditor from './aceFileEditor.jsx';
+import Dropdown from './Dropdown.jsx';
+import ReactApp from './reactApp.jsx'
 
 import 'brace/mode/java';
 import 'brace/theme/github';
@@ -18,21 +20,10 @@ socket.emit('client:sendMessage', 'hello');
 
 // Render editor 
 render(
-	<TestComponent socket={socket} />,
+	<ReactApp socket={socket}/>,
   document.getElementById('example')
 );
 
-render(
-  <AceEditor
-    mode="text"
-    theme="monokai"
-    name="blah2"
-    fontSize={14}
-    height="11em"
-    value={'hello, I am just a simple editor'}
-  />,
-  document.getElementById('example2')
-);
 
 if (module.hot) {
   module.hot.accept();

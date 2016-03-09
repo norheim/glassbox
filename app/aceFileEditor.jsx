@@ -4,7 +4,7 @@ import brace from 'brace';
 
 import AceEditor from 'react-ace';
 import AwesomeComponent from './awesomeComponent.jsx';
-import Dropdown from './Dropdown.jsx';
+import FileExplorer from './filexplorer.jsx';
 
 import 'brace/mode/java';
 import 'brace/theme/github';
@@ -15,21 +15,11 @@ class AceFileEditor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value : '',
-      jsxfiles : [],
+      value : ''
     };
     this.content = this.content.bind(this);
     this.handleChange = this.handleChange.bind(this);
 
-    this.props.socket.emit('client:readDirRequest','');
-
-    this.props.socket.on('server:readDirResponse', msg => {
-      this.setState({jsxfiles: msg});
-    });
-    // Receive data from server
-    this.props.socket.on('server:readFileResponse', msg => {
-      this.setState({value: msg});
-    });
   }
 
   content (newValue) {
@@ -37,10 +27,8 @@ class AceFileEditor extends React.Component {
   	this.setState({value: newValue});
     //this.setState({editorValue: 'hi'});
   }
-
-  handleChange (filename) {
-    console.log('readFileRequest');
-    this.props.socket.emit('client:readFileRequest',filename);
+  handleChange (filecontent){
+    this.setState({value: filecontent});
   }
 
   render() {
@@ -49,7 +37,7 @@ class AceFileEditor extends React.Component {
 
     return (
       <div>
-      <Dropdown options={options} onChange={this.handleChange}/>
+      <FileExplorer defaultFile='default' folder='cells' func={this.handleChange}/> 
 		  <AceEditor
 		    mode="javascript"
 		    theme="monokai"
